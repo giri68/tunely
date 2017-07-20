@@ -39,8 +39,25 @@ sampleAlbums.push({
 
 $(document).ready(function() {
   console.log('app.js loaded!');
+
+  $.ajax({
+    method: "GET",
+    url: "/api/albums",
+    success: handleSuccess,
+    error: handleError
+  });
+
 });
 
+function handleSuccess(albums) {
+  albums.forEach(function(album) {
+    renderAlbum(album);
+  });
+};
+
+function handleError(err) {
+  console.log(err);
+};
 
 
 
@@ -49,4 +66,36 @@ $(document).ready(function() {
 function renderAlbum(album) {
   console.log('rendering album:', album);
 
-}
+  var artistName = album.artistName;
+  var name = album.name;
+  var releaseDate = album.releaseDate;
+  var genres = album.genres;
+
+  $('#albums').prepend(`
+    <div class='row'>
+      <div class="col-md-3 col-xs-12 thumbnail album-art">
+      <img src="/images/800x800.png" alt="album image">
+      </div>
+
+      <div class="col-md-9 col-xs-12">
+      <ul class="list-group">
+        <li class="list-group-item">
+        <h4 class='inline-header'>Album Name:</h4>
+        <span class='album-name'>${name}</span>
+        </li>
+
+        <li class="list-group-item">
+        <h4 class='inline-header'>Artist Name:</h4>
+        <span class='artist-name'>${artistName}</span>
+        </li>
+
+        <li class="list-group-item">
+        <h4 class='inline-header'>Released date:</h4>
+        <span class='album-releaseDate'>${releaseDate}</span>
+        </li>
+      </ul>
+      </div>
+    </div>
+  `);
+
+};
