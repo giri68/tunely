@@ -4,6 +4,8 @@ var app = express();
 //Set up express app to serve public directory as static
 app.use(express.static('public'));
 
+var db = require('./models');
+
 //ROUTES
 app.get('/', function(req, res){
   res.sendFile('views/index.html' , { root : __dirname});
