@@ -4,7 +4,7 @@ var albumsList =[
   // data here soon!
 
   {
-    
+
     artistName: 'Nine Inch Nails',
     name: 'The Downward Spiral',
     releaseDate: '1994, March 8',
